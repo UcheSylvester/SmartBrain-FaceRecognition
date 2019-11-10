@@ -11,8 +11,10 @@ function App() {
     <div className="App">
       <Navigation />
       <Logo />
-      <Rank />
-      <ImageLinkForm />
+      <div className="body-container">
+        <Rank />
+        <ImageLinkForm />
+      </div>
       {/*<FaceRecogntion /> */}
     </div>
   );
