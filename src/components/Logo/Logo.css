@@ -1,0 +1,15 @@
+.Tilt {
+  height: 12em;
+  width: 10em;
+  background: linear-gradient(to right, rgb(149, 0, 255), rgb(255, 192, 0));
+}
+
+div.Tilt-inner {
+  display: center;
+  justify-content: center;
+  align-items: center;
+}
+
+div.Tilt-inner img {
+  width: 70%;
+}
