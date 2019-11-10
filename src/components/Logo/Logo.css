@@ -2,10 +2,13 @@
   height: 12em;
   width: 10em;
   background: linear-gradient(to right, rgb(149, 0, 255), rgb(255, 192, 0));
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 div.Tilt-inner {
-  display: center;
+  display: flex;
   justify-content: center;
   align-items: center;
 }

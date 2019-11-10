@@ -3,9 +3,6 @@ import Tilt from 'react-tilt'
 import './Logo.css'
 import brain from './brain-logo.png'
 
-const tiltOptions = {
-
-}
 
 const Logo = () => {
   return (
