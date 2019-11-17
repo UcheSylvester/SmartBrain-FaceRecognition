@@ -1,6 +1,4 @@
 .App {
-  /* display: flex;
-  flex-direction: column; */
   text-align: center;
 }
 
@@ -11,6 +9,5 @@
 }
 
 .body-container {
-  /* border: 2px solid red; */
   margin-top: -1em;
 }
