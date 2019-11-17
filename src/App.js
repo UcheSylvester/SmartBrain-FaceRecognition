@@ -6,7 +6,7 @@ import Logo from './components/Logo/Logo'
 import Rank from './components/Rank/Rank'
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm'
 import FaceRecogntion from './components/FaceRecognition/FaceRecognition'
-
+import Sigin from './components/Signin/Signin'
 // import Clarifai from 'clarifai'
 
 const Clarifai = require('clarifai');
@@ -21,7 +21,8 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: ''
+      box: '',
+      route: 'signin'
     }
   }
 
@@ -65,23 +66,34 @@ class App extends Component {
       .catch(error => console.log(error))
   }
 
+  onRouteChange = (route) => {
+    this.setState({ route: route })
+  }
+
+
   render() {
     return (
       <div className="App">
         <div className="row">
           <Logo />
-          <Navigation />
+          {
+            this.state.route === 'home' ?
+              <Navigation onSignout={this.onRouteChange} /> : ''
+          }
         </div>
-
         <div className="body-container">
-        <Rank />
-
-        <ImageLinkForm
-          onInputChange={this.onInputChange}
-          onButtonSubmit={this.onButtonSubmit}
-        />
-        <FaceRecogntion box={this.state.box} imageUrl={this.state.imageUrl} />
-
+          {
+            this.state.route === 'signin' ?
+              <Sigin onSignin={this.onRouteChange} /> :
+              <div>
+                <Rank />
+                <ImageLinkForm
+                  onInputChange={this.onInputChange}
+                  onButtonSubmit={this.onButtonSubmit}
+                />
+                <FaceRecogntion box={this.state.box} imageUrl={this.state.imageUrl} />
+              </div>
+          }
         </div>
 
       </div>
