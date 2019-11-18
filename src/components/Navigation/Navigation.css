@@ -1,0 +1,11 @@
+nav.navigation {
+  display: flex;
+}
+
+nav.navigation p {
+  font-size: 1.3em;
+}
+
+nav.navigation p:hover {
+  text-decoration: underline;
+}
