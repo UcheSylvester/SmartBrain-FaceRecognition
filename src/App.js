@@ -12,7 +12,7 @@ import Register from './components/Register/Register'
 const Clarifai = require('clarifai');
 
 const app = new Clarifai.App({
-  apiKey: '4c6fb33445134414964fce1274e30a56'
+  apiKey: 'db27876c34de41ca883a3818f9d68890'
 });
 
 const initialState = {
@@ -66,7 +66,6 @@ class App extends Component {
     this.setState({
       imageUrl: this.state.input
     })
-
 
     // using the clarifai api to detect face and send request to db
     app.models.predict(
