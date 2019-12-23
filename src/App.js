@@ -41,8 +41,6 @@ class App extends Component {
     const width = image.width;
     const height = image.height;
 
-    // console.log(faceRegion, width, height)
-
     return {
       leftCol: faceRegion.left_col * width,
       topRow: faceRegion.top_row * height,
