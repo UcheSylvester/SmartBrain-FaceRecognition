@@ -12,29 +12,31 @@ import Register from './components/Register/Register'
 const Clarifai = require('clarifai');
 
 const app = new Clarifai.App({
-  apiKey: '95d6002e6c0946308b035aa3fbf0ffee'
+  apiKey: '4c6fb33445134414964fce1274e30a56'
 });
+
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box: '',
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
+}
 
 class App extends Component {
   constructor() {
     super()
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: '',
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      }
-    }
+    this.state = initialState
   }
 
-
+  // Calculating face location based on the data recieved from API
   calculateFaceLocation = (data) => {
     const faceRegion = data.outputs[0].data.regions[0].region_info.bounding_box
     const image = document.getElementById('input-image')
@@ -49,8 +51,8 @@ class App extends Component {
     }
   }
 
+  // setting the face box state
   setFaceBox = (box) => {
-    console.log(box)
     this.setState({ box: box })
   }
 
@@ -61,11 +63,12 @@ class App extends Component {
   }
 
   onButtonSubmit = () => {
-    console.log('clicked')
     this.setState({
       imageUrl: this.state.input
     })
 
+
+    // using the clarifai api to detect face and send request to db
     app.models.predict(
       Clarifai.FACE_DETECT_MODEL,
       this.state.input)
@@ -80,8 +83,10 @@ class App extends Component {
           })
             .then(response => response.json())
             .then(count => {
+              // Modifying entries based on count returned from backend
               this.setState(Object.assign(this.state.user, { entries: count }))
             })
+            .catch(error => console.log(error))
         }
         this.setFaceBox(this.calculateFaceLocation(response))
       })
@@ -90,7 +95,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout' || route === 'signin') {
-      this.setState({ isSignedIn: false })
+      this.setState(initialState)
     } else if (route === 'home') {
       this.setState({ isSignedIn: true })
     }
