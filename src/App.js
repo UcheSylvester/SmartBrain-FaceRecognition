@@ -9,11 +9,6 @@ import FaceRecogntion from './components/FaceRecognition/FaceRecognition'
 import Sigin from './components/Signin/Signin'
 import Register from './components/Register/Register'
 
-const Clarifai = require('clarifai');
-
-const app = new Clarifai.App({
-  apiKey: 'db27876c34de41ca883a3818f9d68890'
-});
 
 const initialState = {
   input: '',
@@ -68,9 +63,16 @@ class App extends Component {
     })
 
     // using the clarifai api to detect face and send request to db
-    app.models.predict(
-      Clarifai.FACE_DETECT_MODEL,
-      this.state.input)
+    fetch('http://localhost:8080/imageurl', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+      .then(response => {
+        return response.json()
+      })
       .then(response => {
         if (response) {
           fetch('http://localhost:8080/image', {
