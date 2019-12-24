@@ -63,7 +63,7 @@ class App extends Component {
     })
 
     // using the clarifai api to detect face and send request to db
-    fetch('http://localhost:8080/imageurl', {
+    fetch('https://polar-inlet-44239.herokuapp.com/imageurl', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
