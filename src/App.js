@@ -33,8 +33,9 @@ class App extends Component {
 
   // Calculating face location based on the data recieved from API
   calculateFaceLocation = (data) => {
+
     const faceRegion = data.outputs[0].data.regions[0].region_info.bounding_box
-    const image = document.getElementById('input-image')
+    const image = document.querySelector('#input-image')
     const width = image.width;
     const height = image.height;
 
@@ -74,8 +75,8 @@ class App extends Component {
         return response.json()
       })
       .then(response => {
-        if (response) {
-          fetch('http://localhost:8080/image', {
+        if (response !== "unable to work with API") {
+          fetch('https://polar-inlet-44239.herokuapp.com/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
